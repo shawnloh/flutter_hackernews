@@ -36,7 +36,7 @@ class Repository {
     }
 
     for (var cache in caches) {
-      if ((cache as Source) != source) {
+      if (!identical(cache, source)) {
         cache.addItem(item);
       }
     }
