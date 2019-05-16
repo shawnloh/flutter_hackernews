@@ -1,7 +1,8 @@
 import 'dart:async';
+
+import '../models/item_model.dart';
 import 'news_api_provider.dart';
 import 'news_db_provider.dart';
-import '../models/item_model.dart';
 
 class Repository {
   List<Source> sources = <Source>[
@@ -35,20 +36,29 @@ class Repository {
     }
 
     for (var cache in caches) {
-      if ((cache as Source)!= source) {
+      if ((cache as Source) != source) {
         cache.addItem(item);
       }
     }
 
     return item;
   }
+
+  clearCache() async {
+    for (var cache in caches) {
+      await cache.clear();
+    }
+  }
 }
 
 abstract class Source {
   Future<List<int>> fetchTopIds();
+
   Future<ItemModel> fetchItem(int id);
 }
 
 abstract class Cache {
-  addItem(ItemModel item);
+  Future<int> addItem(ItemModel item);
+
+  Future<int> clear();
 }

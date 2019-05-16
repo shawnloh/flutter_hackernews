@@ -1,6 +1,7 @@
 import 'package:rxdart/rxdart.dart';
-import '../resources/repository.dart';
+
 import '../models/item_model.dart';
+import '../resources/repository.dart';
 
 class StoriesBloc {
   final _repository = Repository();
@@ -10,6 +11,7 @@ class StoriesBloc {
 
   // Getters to get streams
   Observable<List<int>> get topIds => _topIds.stream;
+
   Observable<Map<int, Future<ItemModel>>> get items => _itemsOutput.stream;
 
   // Getters to sinks
@@ -33,6 +35,10 @@ class StoriesBloc {
   fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
+  }
+
+  clearCache() {
+    _repository.clearCache();
   }
 
   dispose() {

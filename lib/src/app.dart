@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'screens/news_list.dart';
+
 import 'blocs/stories_provider.dart';
+import 'screens/news_list.dart';
 
 class App extends StatelessWidget {
   Widget build(context) {
     return StoriesProvider(
       child: MaterialApp(
-        title: 'Top New!s',
+        title: 'Top Hacker News',
         home: NewsList(),
       ),
     );

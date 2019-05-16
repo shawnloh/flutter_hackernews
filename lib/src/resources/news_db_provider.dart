@@ -1,8 +1,9 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
+
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '../models/item_model.dart';
 import 'repository.dart';
@@ -65,6 +66,10 @@ class NewsDbProvider implements Source, Cache {
   Future<int> addItem(ItemModel item) {
     return db.insert('Items', item.toMap(),
         conflictAlgorithm: ConflictAlgorithm.ignore);
+  }
+
+  Future<int> clear() {
+    return db.delete('Items');
   }
 }
 
